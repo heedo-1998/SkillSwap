@@ -1,0 +1,20 @@
+# Ignore node_modules in the root and any subdirectories
+**/node_modules
+node_modules
+# Ignore build/dist folders
+**/build
+**/dist
+
+# Version control and logs
+.git
+.gitignore
+*.log
+
+# Docker specific
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Secrets (Extremely Important!)
+.env
+.env.*
