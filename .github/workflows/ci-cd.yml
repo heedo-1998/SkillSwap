@@ -38,15 +38,15 @@ jobs:
 
       - name: Install Backend Dependencies
         run: npm ci
-        working-directory: ./backend 
+        working-directory: backend 
 
       - name: Install Frontend Dependencies
         run: npm ci
-        working-directory: ./frontend
+        working-directory: frontend
 
       # --- TEST PHASE ---
       - name: Run Database Migrations (Test)
-        working-directory: ./backend
+        working-directory: backend
         run: npx sequelize-cli db:migrate
         env:
           NODE_ENV: test
