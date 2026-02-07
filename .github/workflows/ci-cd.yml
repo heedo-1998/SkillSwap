@@ -34,25 +34,28 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: "**/package-lock.json"
+          cache-dependency-path: |
+            backend/package-lock.json
+            frontend/package-lock.json
 
-          
       - name: Install Backend Dependencies
+        working-directory: ./backend 
         run: npm ci
-        working-directory: backend 
 
       - name: Install Frontend Dependencies
+        working-directory: ./frontend
         run: npm ci
-        working-directory: frontend
 
       # --- TEST PHASE ---
       - name: Run Database Migrations (Test)
-        working-directory: backend
+        working-directory: ./backend
         run: npx sequelize-cli db:migrate
         env:
           NODE_ENV: test
           DB_URL: postgres://postgres:1234@localhost:5432/skillswap
+
       - name: Run Tests
+        working-directory: ./backend
         run: npm test
 
       # --- DOCKER BUILD & PUSH PHASE ---
@@ -69,7 +72,7 @@ jobs:
         with:
           context: ./backend
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/my-backend:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/skillswap-backend:latest
 
       - name: Build and Push Frontend
         if: github.event_name == 'push'
@@ -77,6 +80,4 @@ jobs:
         with:
           context: ./frontend
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/my-frontend:latest
-
-    
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/skillswap-frontend:latest
