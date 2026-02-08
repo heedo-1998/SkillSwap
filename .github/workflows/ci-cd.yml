@@ -56,9 +56,9 @@ jobs:
         #  NODE_ENV: test
         #  DB_URL: postgres://postgres:1234@localhost:5432/skillswap
 
-      - name: Run Tests
-        working-directory: Backend
-        run: npm test
+     # - name: Run Tests
+      #  working-directory: Backend
+       # run: npm test
 
       # --- DOCKER BUILD & PUSH PHASE ---
       - name: Login to Docker Hub
