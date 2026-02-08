@@ -50,14 +50,14 @@ jobs:
 
       # --- TEST PHASE ---
       - name: Run Database Migrations (Test)
-        working-directory: backend
+        working-directory: Backend
         run: npx sequelize-cli db:migrate
         env:
           NODE_ENV: test
           DB_URL: postgres://postgres:1234@localhost:5432/skillswap
 
       - name: Run Tests
-        working-directory: backend
+        working-directory: Backend
         run: npm test
 
       # --- DOCKER BUILD & PUSH PHASE ---
@@ -72,9 +72,9 @@ jobs:
         if: github.event_name == 'push'
         uses: docker/build-push-action@v5
         with:
-          context: ./backend
+          context: ./Backend
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/skillswap-backend:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/skillswap-Backend:latest
 
       - name: Build and Push Frontend
         if: github.event_name == 'push'
