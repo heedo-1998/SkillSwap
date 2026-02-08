@@ -29,21 +29,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Debug Folder Structure
+        run: |
+          pwd
+          ls -R
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: |
-            backend/package-lock.json
-            frontend/package-lock.json
+          cache-dependency-path: "**/package-lock.json"
 
       - name: Install Backend Dependencies
-        working-directory: ./backend 
+        working-directory: backend 
         run: npm ci
 
       - name: Install Frontend Dependencies
-        working-directory: ./frontend
+        working-directory: frontend
         run: npm ci
 
       # --- TEST PHASE ---
