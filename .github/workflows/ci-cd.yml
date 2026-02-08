@@ -74,7 +74,7 @@ jobs:
         with:
           context: ./Backend
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/skillswap-Backend:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/skillswap-backend:latest
 
       - name: Build and Push Frontend
         if: github.event_name == 'push'
