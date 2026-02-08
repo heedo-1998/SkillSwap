@@ -49,12 +49,12 @@ jobs:
         run: npm ci
 
       # --- TEST PHASE ---
-      - name: Run Database Migrations (Test)
-        working-directory: Backend
-        run: npx sequelize-cli db:migrate
-        env:
-          NODE_ENV: test
-          DB_URL: postgres://postgres:1234@localhost:5432/skillswap
+    #  - name: Run Database Migrations (Test)
+     #   working-directory: Backend
+      #  run: npx sequelize-cli db:migrate
+       # env:
+        #  NODE_ENV: test
+        #  DB_URL: postgres://postgres:1234@localhost:5432/skillswap
 
       - name: Run Tests
         working-directory: Backend
