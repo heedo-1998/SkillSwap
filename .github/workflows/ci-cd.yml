@@ -29,10 +29,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Debug Folder Structure
-        run: |
-          pwd
-          ls -R
+      # DEBUG STEP: This will print the folder structure in your logs
+      - name: Check file structure
+        run: ls -R
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -51,14 +50,14 @@ jobs:
 
       # --- TEST PHASE ---
       - name: Run Database Migrations (Test)
-        working-directory: ./backend
+        working-directory: backend
         run: npx sequelize-cli db:migrate
         env:
           NODE_ENV: test
           DB_URL: postgres://postgres:1234@localhost:5432/skillswap
 
       - name: Run Tests
-        working-directory: ./backend
+        working-directory: backend
         run: npm test
 
       # --- DOCKER BUILD & PUSH PHASE ---
